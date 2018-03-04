@@ -56,8 +56,15 @@ header .toggle-nav:hover span:nth-child(3) {
   width: 100%;
 }
 
-header .toggle-nav > span {
+header .toggle-nav.white-children span {
   background-color: white;
+}
+
+header .toggle-nav.black-children span {
+  background-color: black;
+}
+
+header .toggle-nav > span {
   margin-bottom: 5px;
   width: 100%;
   height: 4px;

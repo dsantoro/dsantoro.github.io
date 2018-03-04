@@ -1,59 +1,62 @@
 console.time('loading')
 
-$(document).ready(function(){
+console.log('We\'re all set')
 
-    console.log('We\'re all set')
+const btnOpenMenu = document.querySelector('.toggle-nav')
 
-    $('.toggle-nav').on('click', function(){
+btnOpenMenu.addEventListener('click', () => {
 
-        $('body').toggleClass('menu-open')
+    document.querySelector('body').classList.toggle('menu-open')
+})
+
+const axysY = () => {
+
+    return (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop
+}
+
+const sections = [].slice.call( document.querySelectorAll('.toggle-sections') )
+
+const target = document.querySelector('.toggle-nav')
+
+window.addEventListener('scroll', () => {
+
+    let topScroll = axysY()
+
+    sections.forEach(element => {
+
+        let posSection = element.offsetTop - 42
+        let hSection = element.offsetHeight
+
+        if (posSection <= topScroll && (posSection + hSection) > topScroll) {
+
+            if (element.classList.contains('dark')) {
+
+                target.classList.remove('black-children')
+                target.classList.add('white-children')
+                return
+            } else {
+                target.classList.remove('white-children')
+                target.classList.add('black-children')
+                return
+            }
+        }
     })
+})
 
-    function axysY() {
+    /*
 
-        return $(window).scrollTop()
-    }
+    $(window).on('scroll load resize', function () {
 
-    function toggleColor(sections, target) {
+        if (axysY() > ($('.skills-trigger').offset().top - ($(window).height() / 2))) {
 
-        $(window).on('resize scroll load', function () {
-
-            var topScroll = axysY()
-
-            $(sections).each(function () {
-                var el = $(this)
-                var posSection = el.offset().top - 42
-                var hSection = el.height()
-
-                if (posSection <= topScroll && (posSection + hSection) > topScroll) {
-                    if ($(this).hasClass('dark')) {
-
-                        $(target).find('span').css({ 'backgroundColor': 'white' })
-                    } else {
-
-                        $(target).find('span').css({ 'backgroundColor': 'black' })
-                    }
-                }
-            })
-        })
-    }
-
-    toggleColor('.toggle-sections', '.toggle-nav')
-
-    $(window).on('scroll load resize', function(){
-
-        if (axysY() > ($('.skills-trigger').offset().top - ($(window).height()/2))) {
-
-            $('.skill-bar').each(function(){
+            $('.skill-bar').each(function () {
 
                 var level = $(this).data('level')
-                $(this).find('.percentage-bar').attr('title', level+'%').css({'width' : level+'%'})
+                $(this).find('.percentage-bar').attr('title', level + '%').css({ 'width': level + '%' })
             })
 
             $('.coffee').addClass('show')
         }
-    })
-
-})
+    })*/
 
 console.timeEnd('loading')
