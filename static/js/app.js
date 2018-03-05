@@ -43,20 +43,23 @@ window.addEventListener('scroll', () => {
     })
 })
 
-    /*
+const skillBars = [].slice.call( document.querySelectorAll('.skill-bar') )
 
-    $(window).on('scroll load resize', function () {
+window.addEventListener('scroll', () => {
 
-        if (axysY() > ($('.skills-trigger').offset().top - ($(window).height() / 2))) {
+    let axys = axysY()
 
-            $('.skill-bar').each(function () {
+    if( axys > document.querySelector('.skills-trigger').offsetTop - window.outerHeight / 2 ) {
 
-                var level = $(this).data('level')
-                $(this).find('.percentage-bar').attr('title', level + '%').css({ 'width': level + '%' })
-            })
+        skillBars.forEach(element => {
 
-            $('.coffee').addClass('show')
-        }
-    })*/
+            let level = element.dataset.level
+            element.querySelector('.percentage-bar').setAttribute('title', `${level}%`)
+            element.querySelector('.percentage-bar').style.width = `${level}%`
+        })
+
+        document.querySelector('.coffee').classList.add('show')
+    }
+})
 
 console.timeEnd('loading')
